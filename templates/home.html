@@ -7,7 +7,7 @@
 </head>
 <body>
 
-    <form action="checkviews/" id=home method="POST"> {% csrf_token %}
+    <form action="{% url 'checkviews' %}" id=home method="POST"> {% csrf_token %}
         <label> Django Chat </label>
         <hr>
         <label for="Room Name"> Room name</label>

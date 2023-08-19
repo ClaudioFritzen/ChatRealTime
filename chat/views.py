@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 
 from chat.models import Room, Message
 
@@ -17,9 +17,11 @@ def checkviews(resquest):
     # pesquisa no banco
 
     if Room.objects.filter(name=room).exists():
-        return redirect('/'+room+'/?username='+username)
+        #return HttpResponse('Olá'+username)
+        return redirect(checkviews)
 
     else:
         new_room = Room.objects.create(name=room)
         new_room.save()
-        return redirect('/'+new_room+'/?username='+username)
+        #return HttpResponse('Olá!! Novo chat criado')
+        return redirect(checkviews)
