@@ -17,11 +17,9 @@ def checkviews(resquest):
     # pesquisa no banco
 
     if Room.objects.filter(name=room).exists():
-        #return HttpResponse('Olá'+username)
-        return redirect(checkviews)
+        return redirect('/'+room+'/?username'+username)
 
     else:
         new_room = Room.objects.create(name=room)
         new_room.save()
-        #return HttpResponse('Olá!! Novo chat criado')
-        return redirect(checkviews)
+        return redirect('/'+room+'/?username'+username) 
