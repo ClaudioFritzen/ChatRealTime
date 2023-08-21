@@ -11,15 +11,20 @@ def room(request, room):
 
 def checkviews(resquest):
 
-    room = resquest.POST['room_name']
-    username = resquest.POST['username']
-
+    room = resquest.POST.get('room_name')
+    username = resquest.POST.get('username')
+    print(room)
+    print(username)
     # pesquisa no banco
 
-    if Room.objects.filter(name=room).exists():
-        return redirect('/'+room+'/?username'+username)
+    room = Room.objects.filter(name=room).exists()
+
+    if room:
+        return HttpResponse('Cheguei aqui!!')
+        #return redirect('/'+room+'/?username'+username)
 
     else:
         new_room = Room.objects.create(name=room)
         new_room.save()
-        return redirect('/'+room+'/?username'+username) 
+        return HttpResponse('Else')
+        #return redirect('/'+room+'/?username'+username) 
