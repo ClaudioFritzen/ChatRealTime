@@ -9,6 +9,20 @@
     <p>Usuário: {{ username }}</p>
     <p>Sala: {{ room_name }}</p>
     
-    <!-- Adicione aqui o código para exibir o conteúdo da sala de chat, se desejar -->
+    <hr>
+    
+    <h2>Mensagens:</h2>
+    <ul>
+        {% for message in messages %}
+            <li>{{ message.value }} - {{ message.user.username }}</li>
+        {% endfor %}
+    </ul>
+    
+    <!-- Formulário para enviar mensagens -->
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="message" placeholder="Digite sua mensagem" required>
+        <button type="submit">Enviar</button>
+    </form>
 </body>
 </html>
