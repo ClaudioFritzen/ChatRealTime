@@ -12,23 +12,20 @@ def room(request, room):
     return render(request, 'room.html')
 
 def checkviews(request):
-
     if request.method == 'POST':
         room_name = request.POST.get('room_name')
         username = request.POST.get('username')
 
-        # Verifique se o sala já existe no banco de dados
+        # Verifique se a sala já existe no banco de dados
         room_exists = Room.objects.filter(name=room_name).exists()
 
         if room_exists:
-            # Se a sala exixtir, redirecione para a pagina do batepapo
+            # Se a sala existir, redirecione para a página do bate-papo
             return redirect(f'/{room_name}/?username={username}')
-        
         else:
-            # se a sala não exixte, cria um sala de bate papo
-            new_room = Room.objects.create(name=room)
-
-            new_room.save() # salve a nova sala no banco
-            return HttpResponse(f'{room_name}/?username={username}')
+            # Se a sala não existir, crie uma sala de bate-papo
+            new_room = Room.objects.create(name=room_name)
+            new_room.save()  # Salve a nova sala no banco
+            return redirect(f'/{room_name}/?username={username}')
     
-    return HttpResponse('Requisição invalida')
+    return HttpResponse('Requisição inválida')
