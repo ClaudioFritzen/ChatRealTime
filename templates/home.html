@@ -6,15 +6,20 @@
     <title>Django Chat</title>
 </head>
 <body> 
+    <h1> Crie ou Acesse uma Sala </h1>
 
-    <form action="#" id=home method="POST"> {% csrf_token %}
+    <form action="{% url 'checkviews' %}" method="post"> 
+        {% csrf_token %}
+
         <label> Django Chat </label>
         <hr>
-        <label for="Room Name"> Room name</label>
+        <label for="room_name"> Room name</label>
         <br>
-        <input type="text" name="room_name" id="room_name">
+        <input type="text" name="room_name" id="room_name" required>
+        <br>
         <br>
         <label for="UserName"> UserName</label>
+        <br>
         <br>
         <input type="text" name="username" id="username">
 
