@@ -8,25 +8,17 @@
 <body> 
     <h1> Crie ou Acesse uma Sala </h1>
 
-    <form action="{% url 'checkviews' %}" method="post"> 
+    <form action="/checkviews/" method="post">
         {% csrf_token %}
-
-        <hr>
-        <label for="room_name"> Room name</label>
-        <br>
+        <label for="room_name">Room name:</label>
         <input type="text" name="room_name" id="room_name" required>
         <br>
-        <br>
-        <label for="username"> UserName</label>
-        <br>
-        <br>
+        <label for="username">Username:</label>
         <input type="text" name="username" id="username">
-
         <br>
-        <br>
-        
-        <button style="background-color:  green; color: white;"> Entrar na sala</button>
+        <button style="background-color:  green; color: white;" type="submit">Entrar na sala</button>
     </form>
+    
 
     
 </body>
