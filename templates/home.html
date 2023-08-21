@@ -11,14 +11,13 @@
     <form action="{% url 'checkviews' %}" method="post"> 
         {% csrf_token %}
 
-        <label> Django Chat </label>
         <hr>
         <label for="room_name"> Room name</label>
         <br>
         <input type="text" name="room_name" id="room_name" required>
         <br>
         <br>
-        <label for="UserName"> UserName</label>
+        <label for="username"> UserName</label>
         <br>
         <br>
         <input type="text" name="username" id="username">
