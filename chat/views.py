@@ -1,4 +1,6 @@
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import render, redirect,get_list_or_404
+
+from django.http import HttpResponse, HttpResponseRedirect
 
 from chat.models import Room, Message
 
@@ -9,22 +11,24 @@ def home(request):
 def room(request, room):
     return render(request, 'room.html')
 
-def checkviews(resquest):
+def checkviews(request):
 
-    room = resquest.POST.get('room_name')
-    username = resquest.POST.get('username')
-    print(room)
-    print(username)
-    # pesquisa no banco
+    if request.method == 'POST':
+        room_name = request.POST.get('room_name')
+        username = request.POST.get('username')
 
-    room = Room.objects.filter(name=room).exists()
+        # Verifique se o sala já existe no banco de dados
+        room_exists = Room.objects.filter(name=room_name).exists()
 
-    if room:
-        return HttpResponse('Cheguei aqui!!')
-        #return redirect('/'+room+'/?username'+username)
+        if room_exists:
+            # Se a sala exixtir, redirecione para a pagina do batepapo
+            return redirect(f'/{room_name}/?username={username}')
+        
+        else:
+            # se a sala não exixte, cria um sala de bate papo
+            new_room = Room.objects.create(name=room)
 
-    else:
-        new_room = Room.objects.create(name=room)
-        new_room.save()
-        return HttpResponse('Else')
-        #return redirect('/'+room+'/?username'+username) 
+            new_room.save() # salve a nova sala no banco
+            return HttpResponse(f'{room_name}/?username={username}')
+    
+    return HttpResponse('Requisição invalida')
