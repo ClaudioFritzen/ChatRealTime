@@ -29,13 +29,13 @@ def checkviews(request):
         room_exists = Room.objects.filter(name=room_name).exists()
 
         if room_exists:
-            # Se a sala existir, redirecione para a página do bate-papo
-            return redirect(f'/{room_name}/?username={username}')
+            # Renderize o template e passe os dados como contexto
+            return render(request, 'room.html', {'room_name': room_name, 'username': username})
         else:
-            # Se a sala não existir, crie uma sala de bate-papo
+            # Se a sala não existir, crie uma sala de bate-papo e renderize o template
             new_room = Room.objects.create(name=room_name)
             new_room.save()  # Salve a nova sala no banco
-            return redirect(f'/{room_name}/?username={username}')
+            return render(request, 'room.html', {'room_name': room_name, 'username': username})
     
     return HttpResponse('Requisição inválida')
 
