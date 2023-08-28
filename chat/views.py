@@ -9,7 +9,16 @@ def home(request):
     return render(request, 'home.html')
 
 def room(request, room):
-    return render(request, 'room.html')
+    username = request.GET.get('username')
+    room_details = Room.objects.get(name=room)
+
+
+
+    return render(request, 'room.html', {
+        'username':username,
+        'room':room,
+        'room_details':room_details
+        })
 
 """
 def checkviews(request):
@@ -38,8 +47,14 @@ def checkview(request):
 
     if Room.objects.filter(name=room).exists():
 
-        return redirect('/'+room+'/?username='+username)
+        return render(request, 'room.html',
+                       {'username':username,
+                        'room':room
+                        })
     else:
         new_room  = Room.objects.create(name=room)
         new_room.save()
-        return redirect('/'+room+'/?username='+username)
+        return render(request, 'room.html',
+                       {'username':username,
+                        'room':room
+                        })
