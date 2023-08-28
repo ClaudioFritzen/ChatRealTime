@@ -2,27 +2,79 @@
 <html>
 <head>
     <title>Sala de Chat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            margin: 0 auto;
+            max-width: 800;
+            padding: 0 20px;
+        }
+
+        .container {
+            border: 2px solid #dedede;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        .darker{
+            border-color: #ccc;
+            bottom: #ddd ;
+        }
+
+        .container::after{
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        .container img {
+            float: left;
+            max-width: 60px;
+            width: 100%;
+            margin-right: 20px;
+            border-radius: 50%;
+
+        }
+
+        .container img.right {
+            float: right;
+            margin-left: 20px;
+            margin-right: 0;
+        }
+
+        .time-right {
+            float: right;
+            color: #aaa;
+
+        }
+
+    </style>
 </head>
 <body>
-    <h1>Bem-vindo à Sala de Chat</h1>
+    <h2>Room Name - Djchat</h2>
+
+    <div id="display">
+        <div class="container darker">
+            <p>Tom</p><p>Hello World</p>
+            <span class="time-left"> 20th, April 2021</span>
+        </div>
+    </div>
     
-    <p>Usuário: {{ username }}</p><br><br>
-    <p>Sala: {{ room_name }}</p>
-    
-    <hr>
-    
-    <h2>Mensagens:</h2>
-    <ul>
-        {% for message in messages %}
-            <li>{{ message.value }} - {{ message.user.username }}</li>
-        {% endfor %}
-    </ul>
-    
-    <!-- Formulário para enviar mensagens -->
-    <form method="post">
-        {% csrf_token %}
-        <input type="text" name="message" placeholder="Digite sua mensagem" required>
-        <button type="submit">Enviar</button>
-    </form>
+    <div class="container">
+        <style>
+
+        </style>
+
+        <form id=post-form action="">
+            {% csfr_token %}
+            <input type="hidden" name="username" id="username" value="username" />
+            <input type="hidden" name="room_id" id="room_id" value="room_id" />
+            <input type="text" name="message" id="message" value="message" width="100px" />
+            <input type="submit" value="Enviar">
+        </form>
+    </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script
 </html>
