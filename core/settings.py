@@ -31,6 +31,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = os.getenv('DEBUG', False)
 
 ALLOWED_HOSTS = []
+APPEND_SLASH=False
 
 
 # Application definition
