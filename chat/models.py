@@ -8,5 +8,5 @@ class Room(models.Model):
 class Message(models.Model):
     value = models.CharField(max_length=100000)
     date = models.DateTimeField(default=datetime.now, blank=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)  # Usuário que enviou a mensagem
+    user = models.CharField(max_length=100)  # Usuário que enviou a mensagem
     room = models.ForeignKey(Room, on_delete=models.CASCADE)  # Sala à qual a mensagem pertence
