@@ -11,6 +11,7 @@ def home(request):
 def room(request, room):
     return render(request, 'room.html')
 
+"""
 def checkviews(request):
     if request.method == 'POST':
         room_name = request.POST.get('room_name')
@@ -29,3 +30,16 @@ def checkviews(request):
             return redirect(f'/{room_name}/?username={username}')
     
     return HttpResponse('Requisição inválida')
+"""
+
+def checkview(request):
+    room = request.POST['room_name']
+    username = request.POST['username']
+
+    if Room.objects.filter(name=room).exists():
+
+        return redirect('/'+room+'/?username='+username)
+    else:
+        new_room  = Room.objects.create(name=room)
+        new_room.save()
+        return redirect('/'+room+'/?username='+username)

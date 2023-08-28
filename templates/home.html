@@ -8,7 +8,7 @@
 <body> 
     <h1> Crie ou Acesse uma Sala </h1>
 
-    <form action="checkviews" method="POST">
+    <form action="checkview" method="POST">
         {% csrf_token %}
         <label for="room_name">Room name:</label>
         <input type="text" name="room_name" id="room_name" required>
